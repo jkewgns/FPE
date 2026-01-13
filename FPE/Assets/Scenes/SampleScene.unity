@@ -566,9 +566,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 176065675521528417, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 635129458673279866, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212961244563441570, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738231334092434925, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3316909495342729475, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658024200974025682, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4856018686673293834, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
       propertyPath: m_Name
       value: StarterCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435230936963706418, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6749430674660280522, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -609,6 +637,10 @@ PrefabInstance:
     - target: {fileID: 6749430674660280522, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748280972156151105, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
