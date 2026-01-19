@@ -1,41 +1,42 @@
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public float moveSmoothness;
-    public float rotSmoothness;
+   [Header("Attachments")]
+   public Transform carTarget;
+   public Rigidbody carRigidbody;
 
-    public Vector3 moveOffset;
-    public Vector3 rotOffset;
+   [Header("Positioning")]
+   public Vector3 headOffset = new Vector3(0, 0, 0);
 
-    public Transform carTarget;
+   [Header("Neck Movement")]
+   [Range(0, 1)] public float steeringInfluence = 0.5f;
+   [Range(0, 1)] public float velocityInfluence = 0.3f;
+   public float lookSmoothness = 10f;
+   private Transform virtualCamTransform;
 
-    void FixedUpdate()
-    {
-        FollowTarget();
-    }
+   void Start()
+   {
+       virtualCamTransform = GetComponent<CinemachineCamera>()?.transform;
+   }
 
-    void FollowTarget()
-    {
-        HandleMovement();
-        HandleRotation();
-    }
+   void FixedUpdate()
+   {
+       if (!carTarget || !carRigidbody || virtualCamTransform == null) return;
 
-    void HandleMovement()
-    {
-        Vector3 targetPos = new Vector3();
-        targetPos = carTarget.TransformPoint(moveOffset);
-    
-        transform.position = Vector3.Lerp(transform.position, targetPos, moveSmoothness * Time.deltaTime);
-    }
+       Vector3 targetPos = carTarget.TransformPoint(headOffset);
+       virtualCamTransform.position = targetPos;
 
-    void HandleRotation()
-    {
-        var direction = carTarget.position - transform.position;
-        var rotation = new Quaternion();
+       Vector3 carForward = carTarget.forward;
+       Vector3 velocityDir = carRigidbody.linearVelocity.normalized;
+       if (carRigidbody.linearVelocity.magnitude < 1f)
+           velocityDir = carForward;
+       Vector3 lookDir = Vector3.Slerp(carForward, velocityDir, velocityInfluence);
+       float steerInput = Input.GetAxis("Horizontal");
+       Quaternion steerLook = Quaternion.AngleAxis(steerInput * 30f * steeringInfluence, carTarget.up);
+       Quaternion targetRotation = Quaternion.LookRotation(lookDir, carTarget.up) * steerLook;
 
-        rotation = Quaternion.LookRotation(direction + rotOffset, Vector3.up);
-
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotSmoothness * Time.deltaTime);
-    }
+       virtualCamTransform.rotation = Quaternion.Slerp(virtualCamTransform.rotation, targetRotation, Time.fixedDeltaTime * lookSmoothness);
+   }
 }
