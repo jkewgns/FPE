@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: c000a9ff23aaa9845996b2034c4c1089
+guid: 2cc916538a029a749ab4b1cfd7104292
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,27 +34,27 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
     wrapV: 0
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -173,12 +173,56 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Initial-Drift-short-logo-black-and-white_7
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 682
+        width: 1198
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a240636a1e4a9024683119c27b095c9a
+      internalID: 1132020826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Initial-Drift-short-logo-black-and-white_27
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 43
+        width: 1196
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56cd4a92d5148154db216d515eaf2afa
+      internalID: -2135097640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: abd635f765eb9e948a0e96354de50f7e
     internalID: 0
     vertices: []
     indices: 
@@ -187,7 +231,47 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Initial-Drift-short-logo-black-and-white_0: -1670654321
+      Initial-Drift-short-logo-black-and-white_1: -688614827
+      Initial-Drift-short-logo-black-and-white_10: -273154115
+      Initial-Drift-short-logo-black-and-white_11: 1292242923
+      Initial-Drift-short-logo-black-and-white_12: -579712795
+      Initial-Drift-short-logo-black-and-white_13: -2142346408
+      Initial-Drift-short-logo-black-and-white_14: 1709676044
+      Initial-Drift-short-logo-black-and-white_15: 776503070
+      Initial-Drift-short-logo-black-and-white_16: 914794962
+      Initial-Drift-short-logo-black-and-white_17: 1344033278
+      Initial-Drift-short-logo-black-and-white_18: -1301561880
+      Initial-Drift-short-logo-black-and-white_19: -489609585
+      Initial-Drift-short-logo-black-and-white_2: 1381404494
+      Initial-Drift-short-logo-black-and-white_20: 2128216430
+      Initial-Drift-short-logo-black-and-white_21: 1357616026
+      Initial-Drift-short-logo-black-and-white_22: -1124220707
+      Initial-Drift-short-logo-black-and-white_23: 581612679
+      Initial-Drift-short-logo-black-and-white_24: -1285549760
+      Initial-Drift-short-logo-black-and-white_25: 1871859336
+      Initial-Drift-short-logo-black-and-white_26: -1960568466
+      Initial-Drift-short-logo-black-and-white_27: -2135097640
+      Initial-Drift-short-logo-black-and-white_28: 1321688946
+      Initial-Drift-short-logo-black-and-white_29: -629890525
+      Initial-Drift-short-logo-black-and-white_3: 10230693
+      Initial-Drift-short-logo-black-and-white_30: 1022774824
+      Initial-Drift-short-logo-black-and-white_31: -439948351
+      Initial-Drift-short-logo-black-and-white_32: 1890705678
+      Initial-Drift-short-logo-black-and-white_33: -164326401
+      Initial-Drift-short-logo-black-and-white_34: -1301163719
+      Initial-Drift-short-logo-black-and-white_35: -519544030
+      Initial-Drift-short-logo-black-and-white_36: 113633497
+      Initial-Drift-short-logo-black-and-white_37: -131373865
+      Initial-Drift-short-logo-black-and-white_38: -2139895328
+      Initial-Drift-short-logo-black-and-white_39: 558036003
+      Initial-Drift-short-logo-black-and-white_4: 667270850
+      Initial-Drift-short-logo-black-and-white_5: -866523302
+      Initial-Drift-short-logo-black-and-white_6: 581035177
+      Initial-Drift-short-logo-black-and-white_7: 1132020826
+      Initial-Drift-short-logo-black-and-white_8: 334602594
+      Initial-Drift-short-logo-black-and-white_9: 406969949
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

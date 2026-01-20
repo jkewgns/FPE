@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: c000a9ff23aaa9845996b2034c4c1089
+guid: 34664785dcf7bf14fa9e7b59872867db
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,24 +37,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 781, z: 290, w: 30}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -173,13 +173,35 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Initial-Drift-long-logo-textured_7
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 829
+        width: 1619
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a66514a99d152b34d946dc6c593e4dd7
+      internalID: 624935023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -187,7 +209,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Initial-Drift-long-logo-textured_0: -918902170
+      Initial-Drift-long-logo-textured_1: -1559268509
+      Initial-Drift-long-logo-textured_10: -1075536168
+      Initial-Drift-long-logo-textured_11: 544615705
+      Initial-Drift-long-logo-textured_12: -517173035
+      Initial-Drift-long-logo-textured_13: 145143289
+      Initial-Drift-long-logo-textured_2: -1947102715
+      Initial-Drift-long-logo-textured_3: 669200506
+      Initial-Drift-long-logo-textured_4: 1963697564
+      Initial-Drift-long-logo-textured_5: 2058329818
+      Initial-Drift-long-logo-textured_6: -288971770
+      Initial-Drift-long-logo-textured_7: 624935023
+      Initial-Drift-long-logo-textured_8: -682705128
+      Initial-Drift-long-logo-textured_9: -779803859
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
