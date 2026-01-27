@@ -24,7 +24,7 @@ public class CarController : MonoBehaviour
     public float brakeAcceleration = 50.0f;
 
     public float turnSensitivity = 1.0f;
-    public float maxSteerAngle = 30.0f;
+    public float maxSteerAngle = 70.0f;
 
     public Vector3 _centerOfMass;
     

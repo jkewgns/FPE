@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
         trackSelectMenu.SetActive(true);
         optionsMenu.SetActive(false);
         carSelectMenu.SetActive(false);
+
+        //temp:
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void OpenOptions()
