@@ -600,6 +600,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StarterCar
       objectReference: {fileID: 0}
+    - target: {fileID: 4856018686673293834, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5435230936963706418, guid: 9730fc0b9107b9c45ac8d80ad54263fb, type: 3}
       propertyPath: m_SortingOrder
       value: 1

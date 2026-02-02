@@ -1,28 +1,28 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Wheel
+public class DriftWheel
 {
-    public Transform wheelTransform; // Visual wheel
+    public Transform wheelTransform; // The visual wheel
     public bool isSteerable;         // Front wheels
     public bool isRearWheel;         // Rear wheels
-    public TrailRenderer driftTrail; // Optional smoke/trail effect
+    public TrailRenderer driftTrail; // Optional trail for drifting
 }
 
-public class CarController : MonoBehaviour
+public class ArcadeWheelSystem : MonoBehaviour
 {
-    public Wheel[] wheels;
+    public DriftWheel[] wheels;
     public Rigidbody carRb;
-
-    [Header("Movement")]
-    public float maxSpeed = 200f;
-    public float acceleration = 50f;
-    public float brakePower = 2f;
-    public float driftFactor = 0.95f;
 
     [Header("Steering")]
     public float maxSteerAngle = 30f;
     public float steerSpeed = 5f;
+
+    [Header("Wheel Rotation")]
+    public float wheelRadius = 0.35f; // in meters
+
+    [Header("Drift Trails")]
+    public float driftSpeedThreshold = 5f; // min sideways speed to show trails
 
     private float horizontalInput;
     private float verticalInput;
@@ -36,9 +36,7 @@ public class CarController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
-        Steer();
-        Drift();
+        ApplySteering();
     }
 
     void GetInputs()
@@ -47,18 +45,7 @@ public class CarController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
     }
 
-    void Move()
-    {
-        Vector3 forward = transform.forward * verticalInput * acceleration * Time.fixedDeltaTime;
-        carRb.AddForce(forward, ForceMode.VelocityChange);
-
-        if (verticalInput < -0.1f)
-            carRb.linearVelocity *= 1f - brakePower * Time.fixedDeltaTime;
-
-        carRb.linearVelocity = Vector3.ClampMagnitude(carRb.linearVelocity, maxSpeed);
-    }
-
-    void Steer()
+    void ApplySteering()
     {
         foreach (var wheel in wheels)
         {
@@ -72,19 +59,14 @@ public class CarController : MonoBehaviour
         }
     }
 
-    void Drift()
-    {
-        Vector3 forwardVel = transform.forward * Vector3.Dot(carRb.linearVelocity, transform.forward);
-        Vector3 rightVel = transform.right * Vector3.Dot(carRb.linearVelocity, transform.right) * driftFactor;
-        carRb.linearVelocity = forwardVel + rightVel;
-    }
-
     void RotateWheels()
     {
         float distanceTravelled = carRb.linearVelocity.magnitude * Time.deltaTime;
+        float rotationAngle = distanceTravelled / (2 * Mathf.PI * wheelRadius) * 360f;
+
         foreach (var wheel in wheels)
         {
-            wheel.wheelTransform.Rotate(distanceTravelled / (2 * Mathf.PI * 0.35f) * 360f, 0, 0, Space.Self);
+            wheel.wheelTransform.Rotate(rotationAngle, 0, 0, Space.Self);
         }
     }
 
@@ -95,8 +77,13 @@ public class CarController : MonoBehaviour
 
         foreach (var wheel in wheels)
         {
-            if (wheel.driftTrail != null)
-                wheel.driftTrail.emitting = wheel.isRearWheel && sidewaysSpeed > 5f;
+            if (wheel.driftTrail)
+            {
+                if (wheel.isRearWheel && sidewaysSpeed > driftSpeedThreshold)
+                    wheel.driftTrail.emitting = true;
+                else
+                    wheel.driftTrail.emitting = false;
+            }
         }
     }
 }
