@@ -1,102 +1,129 @@
 using UnityEngine;
-
-[System.Serializable]
-public class Wheel
-{
-    public Transform wheelTransform; // Visual wheel
-    public bool isSteerable;         // Front wheels
-    public bool isRearWheel;         // Rear wheels
-    public TrailRenderer driftTrail; // Optional smoke/trail effect
-}
+using System;
+using System.Collections.Generic;
 
 public class CarController : MonoBehaviour
 {
-    public Wheel[] wheels;
-    public Rigidbody carRb;
+    public enum Axel
+    {
+        Front,
+        Rear
+    }
 
-    [Header("Movement")]
-    public float maxSpeed = 200f;
-    public float acceleration = 50f;
-    public float brakePower = 2f;
-    public float driftFactor = 0.95f;
+    [Serializable]
+    public struct Wheel
+    {
+        public GameObject wheelModel;
+        public WheelCollider wheelCollider;
+        public GameObject wheelEffectObj;
+        public ParticleSystem smokeParticle;
+        public Axel axel;
+    }
 
-    [Header("Steering")]
-    public float maxSteerAngle = 30f;
-    public float steerSpeed = 5f;
+    public float maxAcceleration = 30.0f;
+    public float brakeAcceleration = 50.0f;
 
-    private float horizontalInput;
-    private float verticalInput;
+    public float turnSensitivity = 1.0f;
+    public float maxSteerAngle = 30.0f;
 
+    public Vector3 _centerOfMass;
+    
+    public List<Wheel> wheels;
+
+    float moveInput;
+    float steerInput;
+
+    private Rigidbody carRb;
+
+    void Start()
+    {
+        carRb = GetComponent<Rigidbody>();
+        carRb.centerOfMass = _centerOfMass;
+    }
+    
     void Update()
     {
         GetInputs();
-        RotateWheels();
-        HandleDriftTrails();
+        AnimatedWheels();
+        WheelEffects();
     }
-
-    void FixedUpdate()
+    
+    void LateUpdate()
     {
         Move();
         Steer();
-        Drift();
+        Brake();
     }
 
     void GetInputs()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        moveInput = Input.GetAxis("Vertical");
+        steerInput = Input.GetAxis("Horizontal");
     }
 
     void Move()
     {
-        Vector3 forward = transform.forward * verticalInput * acceleration * Time.fixedDeltaTime;
-        carRb.AddForce(forward, ForceMode.VelocityChange);
-
-        if (verticalInput < -0.1f)
-            carRb.linearVelocity *= 1f - brakePower * Time.fixedDeltaTime;
-
-        carRb.linearVelocity = Vector3.ClampMagnitude(carRb.linearVelocity, maxSpeed);
+        foreach(var wheel in wheels)
+        {
+            wheel.wheelCollider.motorTorque = moveInput * 600 * maxAcceleration * Time.deltaTime;
+        }
     }
 
     void Steer()
     {
-        foreach (var wheel in wheels)
+        foreach(var wheel in wheels)
         {
-            if (wheel.isSteerable)
+            if(wheel.axel == Axel.Front)
             {
-                float targetAngle = horizontalInput * maxSteerAngle;
-                Vector3 localEuler = wheel.wheelTransform.localEulerAngles;
-                localEuler.y = Mathf.LerpAngle(localEuler.y, targetAngle, Time.fixedDeltaTime * steerSpeed);
-                wheel.wheelTransform.localEulerAngles = new Vector3(localEuler.x, localEuler.y, localEuler.z);
+                var _steerAngle = steerInput * turnSensitivity * maxSteerAngle;
+                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, 0.6f);
             }
         }
     }
 
-    void Drift()
+    void Brake()
     {
-        Vector3 forwardVel = transform.forward * Vector3.Dot(carRb.linearVelocity, transform.forward);
-        Vector3 rightVel = transform.right * Vector3.Dot(carRb.linearVelocity, transform.right) * driftFactor;
-        carRb.linearVelocity = forwardVel + rightVel;
-    }
-
-    void RotateWheels()
-    {
-        float distanceTravelled = carRb.linearVelocity.magnitude * Time.deltaTime;
-        foreach (var wheel in wheels)
+        if(Input.GetKey(KeyCode.Space) || moveInput == 0)
         {
-            wheel.wheelTransform.Rotate(distanceTravelled / (2 * Mathf.PI * 0.35f) * 360f, 0, 0, Space.Self);
+            foreach(var wheel in wheels)
+            {
+                wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
+            }
+        }
+        else
+        {
+            foreach(var wheel in wheels)
+            {
+                wheel.wheelCollider.brakeTorque = 0;
+            }
         }
     }
 
-    void HandleDriftTrails()
+    void AnimatedWheels()
     {
-        Vector3 localVelocity = transform.InverseTransformDirection(carRb.linearVelocity);
-        float sidewaysSpeed = Mathf.Abs(localVelocity.x);
-
-        foreach (var wheel in wheels)
+        foreach(var wheel in wheels)
         {
-            if (wheel.driftTrail != null)
-                wheel.driftTrail.emitting = wheel.isRearWheel && sidewaysSpeed > 5f;
+            Quaternion rot;
+            Vector3 pos;
+            wheel.wheelCollider.GetWorldPose(out pos, out rot);
+            wheel.wheelModel.transform.position = pos;
+            wheel.wheelModel.transform.rotation = rot * Quaternion.Euler(0, 0, -90);
+        }
+    }
+
+    void WheelEffects()
+    {
+        foreach(var wheel in wheels)
+        {
+            if(Input.GetKey(KeyCode.Space) && wheel.axel == Axel.Rear && wheel.wheelCollider.isGrounded == true && carRb.linearVelocity.magnitude >= 10.0f)
+            {
+                wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = true;
+                wheel.smokeParticle.Emit(1);
+            }
+            else
+            {
+                wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;
+            }
         }
     }
 }
